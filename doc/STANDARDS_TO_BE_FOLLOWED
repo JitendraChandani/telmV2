@@ -28,6 +28,7 @@ Code:
     Blocks should be {|x| ... } on one line and do |x|...end on multiple lines. .
     One line if statements when appropriate.
     A ridiculously large number of Railsy plugins use single table inheritance for things that it will turn out that you want to search over, avoid them if you want to be able to scale at all.
+    Use inmemory database like sqlite, h2 for unit testing
 
 Security:
 
@@ -67,3 +68,5 @@ Ruby on Rails Code Quality Checklist
     All tests pass before code is merged into a shared repository. …
     Every fixed defect on a deployed product has tests added to prevent regression. …
     Every plugin installed has been code reviewed. …
+	
+    
