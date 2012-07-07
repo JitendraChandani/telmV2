@@ -1,0 +1,162 @@
+!!!
+:css
+  .admission_form{
+    width: 50%;
+    margin-left: 275px;
+
+  }
+  .admission_form label{
+    float: left;
+    font-family: "MuseoSans500",helvetica,arial,sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    padding:4px 8px;
+  }
+
+  label.highlight{
+    font-weight:bold;
+  }
+  .admission_form input, .admission textarea{
+    width: 221px;
+    background: transparent url('/assets/bg.jpg') no-repeat;
+    color : black;
+    height:20px;
+    border:0;
+    padding:4px 8px;
+  }
+  #admission_form_gender{
+    width: 221px;
+  }
+:javascript
+  $(document).ready(function(){
+    $("#reject").click(function(){
+      $("#admission_form_status").val(3);
+      $(".edit_admission_form").submit();
+    });
+
+    $("#archive").click(function(){
+      $("#admission_form_status").val(2);
+      $(".edit_admission_form").submit();
+    });
+
+    $("#accept").click(function(){
+      $("#admission_form_status").val(1);
+      $(".edit_admission_form").submit();
+    });
+  });
+%h1#page_header
+  Admission Form for #{Time.now.year} To #{Time.now.year + 1 }
+
+%hr/
+= form_for @admission,:url=>{ :controller=>'admission',:action=>'update',:id=>params[:id] } do |f|
+  = f.hidden_field :status
+  %table.admission_form
+    %tr
+      %td.header{:colspan=>2,:align=>'center'}
+        Student Details
+    %tr
+      %td
+        %label.highlight First Name
+      %td
+        %label.highlight Photo
+    %tr
+      %td
+        %label #{@admission.first_name}
+      %td{:rowspan=>7}
+        %img{ :src=> "#{@admission.photo.url}",:width=>200,:height=>180 }
+    %tr
+      %td
+        %label.highlight Last Name:
+    %tr
+      %td
+        %label #{@admission.last_name}
+    %tr
+      %td
+        %label.highlight Email
+    %tr
+      %td
+        %label #{@admission.email}
+    %tr
+      %td
+        %label.highlight Contact No:
+    %tr
+      %td
+        %label #{@admission.contact_no}
+    %tr
+      %td
+        %label.highlight Gender
+      %td
+        %label Male
+    %tr
+      %td
+        %label.highlight  Class
+      %td
+        %label #{@admission.standard}
+    %tr
+      %td
+        %label.highlight Mother Tongue
+      %td
+        %label #{@admission.mother_tongue}
+    %tr
+      %td
+        %label.highlight Religion
+      %td
+        %label #{@admission.religion}
+    %tr
+      %td
+        %label.highlight Nationality
+      %td
+        %label #{@admission.nationality}
+    %tr
+      %td
+        %label.highlight Residence Type
+      %td
+        %label #{@admission.residence_type}
+    %tr
+      %td
+        %label.highlight Previous School Name
+      %td
+        %label #{@admission.prev_school_name}
+    %tr
+      %td
+        %label.highlight Previous School Address
+      %td
+        %label #{@admission.prev_school_address}
+    %tr
+      %td.header{:colspan=>2,:align=>'center'}
+        Parent Details
+    %tr
+      %td
+        %label.highlight Father's Name
+      %td
+        %label #{@admission.father_name}
+    %tr
+      %td
+        %label.highlight Occupation
+      %td
+        %label #{@admission.occupation}
+    %tr
+      %td
+        %label.highlight Father's Email
+      %td
+        %label #{@admission.father_email_address}
+    %tr
+      %td
+        %label.highlight Mother's name:
+      %td
+        %label #{@admission.mother_name}
+    %tr
+      %td
+        %label.highlight Present Address:
+      %td
+        %label #{@admission.present_address}
+    %tr
+      %td
+        %label.highlight Permanent Address
+      %td
+        %label #{@admission.permanent_address}
+    %tr
+      %td{:colspan=>2,:align=>'center'}
+        %input{:type=>'button',:class=>'button',:id=>'reject',:value=>"Reject"}
+        %input{:type=>'button',:class=>'button',:id=>'archive',:value=>"Archive"}
+        %input{:type=>'button',:class=>'button',:id=>'accept',:value=>"Accept"}

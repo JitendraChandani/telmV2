@@ -1,0 +1,69 @@
+Basic Stuff:
+
+    Two Spaces, No tabs
+    Keep lines to a reasonable length(80 characters is classical but 100-120 is probably acceptable with screen sizes these days)
+    Method names should be intuitive and meaningful
+    Variable names should be intuitive and meaningful
+    Don’t commit commented out code - It makes everything confusing and it’s in the version control anyway
+    Comment when necessary - If comments are necessary check that your code couldn’t be simplified first
+    Maintain application style - If it’s a new application then be Railsy.
+    If you want your application to survive then prioritize making the code easy to understand and navigate.
+
+Code:
+
+    Skinny Controllers, Fat models - If a controller method is more than a few lines long then think very carefully about what you’re doing.
+    Views should have very very little ruby in them and certainly shouldn’t touch the Databases.
+    If something requires more than one commit then do it in a branch. Almost everything should take more than one commit.
+    Use plugins only if they’re exactly what you need. Do not cargo cult.
+    In Ruby Regexes \A is the beginning of the string and \z is the end, ^ and $ also match the beginning and end of lines. You almost always want \A and \z, especially in input validations.
+    Try to keep initializers limited to config.
+    Make sure your calls to the database are including everything they need to in the original call, N+1 problems are way too common in most rails apps.
+    RESTful controllers, they’re much easier to navigate and generally more secure.
+    Ternaries (?:) are good if they fit on one line (remember the short lines rule).
+    ||= is good
+    def self.method to define singleton methods not class << self
+    Select the appropriate columns in a database call if you don’t need everything and the table has lots of data.
+    Migrations go up AND down - they maintain database structure not data.
+    Test first all the time unless you’re prototyping. If you’re prototyping then either you throw the code away afterwards or you have to convince someone else to write tests for all of it.
+    Blocks should be {|x| ... } on one line and do |x|...end on multiple lines. .
+    One line if statements when appropriate.
+    A ridiculously large number of Railsy plugins use single table inheritance for things that it will turn out that you want to search over, avoid them if you want to be able to scale at all.
+
+Security:
+
+    Rails has built in SQL Injection protection if you do :conditions => [“something =? “, thing] - Use it
+    h() to escape user inputted content in all pre Rails3 apps.
+    Use attr_accessible to whitelist variables that should mass-assignable.
+
+These are guidelines, break them if you have a good reason. Feel free to leave any extra suggestions, I've probably missed stuff.
+
+
+
+
+
+Two spaces, no tabs
+Don’t use “and” and “or” for boolean tests, instead always use “&&” and “| |”
+MyClass.my_method(my_arg) — not my_method( my_arg ) or my_method my_arg
+
+
+
+Ruby on Rails Code Quality Checklist
+
+    Each controller action only calls one model method other than an initial find or new.
+      (Make custom .new or .update methods in the model with all necessary). …
+    Only one or two instance variables are shared between each controller and view. …
+    All model and variable names are both immediately obvious (to a new developer) and as short as possible without using abbreviations. …
+    All custom “finds” accessed from more than one place in the code use named_scope instead of a custom method. …
+    A .find or .find_by_ is never called in a view or view helper. …
+    There is zero custom code that duplicates functionality of a built-in function in rails. …
+    Code has been aggressively DRYed during development. …
+    All functionality used in two or more models has been turned into a library/module. …
+    All logic duplicated between two or more apps has been turned into a gemified plugin. …
+    STI is not used anywhere …
+    Every design choice should yield the most simplistic design possible for the need of users at the current time.
+      No guesses for future functionality were designed into the application. …
+    Close to full test coverage exists at the highest level of the application: on and between controller actions.
+      Coverage is highest for code used by the most number of end users. …
+    All tests pass before code is merged into a shared repository. …
+    Every fixed defect on a deployed product has tests added to prevent regression. …
+    Every plugin installed has been code reviewed. …

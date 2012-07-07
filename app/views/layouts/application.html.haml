@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %title Telm
+    = stylesheet_link_tag "./web-app-theme/base", "./web-app-theme/themes/default/style", "./web-app-theme/override", :cache => true
+    =# javascript_include_tag :defaults, :cache => true
+    = csrf_meta_tag
+  %body
+    #container
+      #header
+        %h1
+          %a{:href => "/"} Telm
+        #user-navigation
+          %ul.wat-cf
+            %li
+              %a{:href => "/admission/add"}= t("web-app-theme.settings", :default => "Admission Form")
+        #main-navigation
+          %ul.wat-cf
+      #wrapper.wat-cf
+        .flash
+          - flash.each do |type, message|
+            %div{:class => "message #{type}"}
+              %p= message
+        #login_main
+          = yield
+      #footer
+        .block
+          %p
+            Copyright &copy; #{Time.now.year} Telm.
+      #sidebar
+        = yield :sidebar

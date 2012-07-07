@@ -1,0 +1,50 @@
+:css
+  .schools{
+    width: 100%;
+    border: 1px solid black;
+  }
+  td{
+    padding: 10px;
+  }
+  .header{
+    background: #00ffcc;
+    font-weight: bold;
+  }
+  .blank_row{
+    text-align: center;
+  }
+  .add_new{
+    float:right;
+  }
+  .page_header{
+    float:left;
+  }
+%div.page_header
+  %h1 Schools
+%div.add_new
+  %a{:href=>'/school/new'}
+    %input{:type=>'button',:value=>'+Add',:class=>'button'}
+%table.schools
+  %tr.header
+    %td Name
+    %td Contact Person
+    %td Contact No.
+    %td Licences Size
+    %td Status
+  - @schools.each do |school|
+    %tr
+      %td
+        %a{:href=>"/school/show/#{school.id}"}
+          = school.name
+      %td
+        = school.contact_person
+      %td
+        = school.contact_no
+      %td
+        = school.no_of_licences
+      %td
+        = school.status_id
+  - if @schools.size == 0
+    %tr
+      %td.blank_row{:colspan=>5}
+        No schools available.

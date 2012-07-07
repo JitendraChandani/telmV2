@@ -1,0 +1,42 @@
+:css
+  .admissions{
+    width: 100%;
+    border: 1px solid black;
+  }
+  td{
+    padding: 10px;
+  }
+  .header{
+    background: #00ffcc;
+    font-weight: bold;
+  }
+  .blank_row{
+    text-align: center;
+  }
+%h1#page_header
+  Admission Requests
+%hr/
+%table.admissions
+  %tr.header
+    %td Name
+    %td Class
+    %td Status
+    %td Email
+    %td Contact No.
+  - @admissions.each do |admission|
+    %tr
+      %td
+        %a{:href=>"/admission/show/#{admission.id}"}
+          = admission.name
+      %td
+        = admission.standard
+      %td
+        = admission.application_status
+      %td
+        = admission.email
+      %td
+        = admission.contact_no
+  - if @admissions.size == 0
+    %tr
+      %td.blank_row{:colspan=>5}
+        No records found

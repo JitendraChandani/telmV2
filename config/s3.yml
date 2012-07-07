@@ -1,0 +1,12 @@
+development:
+  access_key_id: 'AKIAIPI2E66TNOTNIJYQ'
+  secret_access_key: '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'
+  bucket: 'studymaterials'
+test:
+  access_key_id: 'AKIAIPI2E66TNOTNIJYQ'
+  secret_access_key: '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'
+  bucket: 'studymaterials'
+production:
+  access_key_id: 'AKIAIPI2E66TNOTNIJYQ'
+  secret_access_key: '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'
+  bucket: 'studymaterials'

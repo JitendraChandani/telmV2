@@ -1,0 +1,75 @@
+!!!
+:css
+  #main{
+    border: 1px solid black;
+    min-height: 550px;
+  }
+  #calender{
+    float: right;
+    margin-top: 10px;
+    width: 27%;
+    border: 1px solid black;
+  }
+  .header{
+      background: #00ffcc;
+      font-weight: normal;
+      font-size: 20px;
+      padding: 5px;
+  }
+  #page_header{
+    text-align:center;
+  }
+%html
+  %head
+    %title Telm
+    = stylesheet_link_tag "./menustyle","./validationEngine.jquery","./web-app-theme/base", "./web-app-theme/themes/default/style", "./web-app-theme/override", :cache => true
+    = stylesheet_link_tag "./fullcalendar","./fullcalendar.print"
+    = javascript_include_tag "jquery-1.7.2.min"
+    = javascript_include_tag "jquery-ui-1.8.17.custom.min"
+    = javascript_include_tag "jquery.validationEngine"
+    = javascript_include_tag "jquery.validationEngine-en"
+    = javascript_include_tag "dropmenu"
+    = javascript_include_tag "application"
+    = csrf_meta_tag
+  %body
+    #container
+      #header
+        %h1
+          %a{:href => "/"} Telm
+        #user-navigation
+          %ul.wat-cf
+            %li
+              - if current_user
+                %a{:href => "#"}= t("web-app-theme.profile", :default => "Profile")
+            %li
+              - if current_user
+                %a{:href => "#"}= t("web-app-theme.settings", :default => "Settings")
+            %li
+              - if current_user
+                %a.logout{:href => "/users/sign_out"}= t("web-app-theme.logout", :default => "Logout")
+              - if current_user.nil?
+                %a.logout{:href => "/"}= t("web-app-theme.logout", :default => "Back")
+        #main-navigation
+          %ul.wat-cf
+      #main-menubar
+        = render :partial => '/layouts/menubar'
+      #wrapper.wat-cf
+        .flash
+          - flash.each do |type, message|
+            %div{:class => "message #{type}"}
+              %p= message
+        .notice
+          - if params[:notice]
+            #{params[:notice]}
+        #main
+          = yield
+        #calender
+          = render :partial=>'/layouts/calendar'
+        #updates
+          = render :partial=> '/layouts/updates'
+      #footer
+        .block
+          %p
+            Copyright &copy; #{Time.now.year} Sakura solutions
+      #sidebar
+        = yield :sidebar

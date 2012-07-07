@@ -1,0 +1,149 @@
+!!!
+:css
+  .admission_form{
+    width: 100%;
+    background: #F0F0F0;
+  }
+  .admission_form label{
+    float: left;
+    font-family: "MuseoSans500",helvetica,arial,sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    padding:4px 8px;
+  }
+  .admission_form input, .admission textarea{
+    width: 221px;
+    background: transparent url('/assets/bg.jpg') no-repeat;
+    color : black;
+    height:20px;
+    border:0;
+    padding:4px 8px;
+  }
+  #admission_form_gender{
+    width: 221px;
+  }
+:javascript
+  $(document).ready(function(){
+    $("#new_admission_form").validationEngine();
+  });
+%h1#page_header
+  Admission Form for #{Time.now.year} To #{Time.now.year + 1 }
+%hr/
+= form_for @admission,:url=>{ :controller=>'admission',:action=>'create' } do |f|
+  -if @admission.errors.any?
+    #error_explanation
+      %h2
+      = "#{pluralize(@admission.errors.count, "error")} prohibited this blog_entry from being saved:"
+      %ul
+        - @admission.errors.full_messages.each do |msg|
+          %li
+            = msg
+  = f.hidden_field :school_id,:value=> 1
+  %table.admission_form
+    %tr
+      %td.header{:colspan=>2,:align=>'center'}
+        Student Details
+    %tr
+      %td
+        = f.label "First Name"
+      %td
+        = f.text_field :first_name , :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Last Name"
+      %td
+        = f.text_field :last_name, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Email"
+      %td
+        = f.text_field :email, :class=>'validate[required,custom[email]]'
+    %tr
+      %td
+        = f.label "Contact No:"
+      %td
+        = f.text_field :contact_no, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Photo:"
+      %td
+        = f.file_field :photo
+    %tr
+      %td
+        = f.label "Gender"
+      %td
+        = f.select :gender,options_for_select([['Male', 1], ['Female', 2]])
+    %tr
+      %td
+        = f.label "Class"
+      %td
+        = f.text_field :standard, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Mother Tongue"
+      %td
+        = f.text_field :mother_tongue, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Religion"
+      %td
+        = f.text_field :religion, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Nationality"
+      %td
+        = f.text_field :nationality, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Residence Type"
+      %td
+        = f.text_field :residence_type, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Previous School Name"
+      %td
+        = f.text_field :prev_school_name, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Previous School Address"
+      %td
+        = f.text_area :prev_school_address ,:rows=>3,:cols=>26, :class=>'validate[required]'
+    %tr
+      %td.header{:colspan=>2,:align=>'center'}
+        Parent Details
+    %tr
+      %td
+        = f.label "Father's Name"
+      %td
+        = f.text_field :father_name, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Occupation"
+      %td
+        = f.text_field :occupation, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Father's Email"
+      %td
+        = f.text_field :father_email_address, :class=>'validate[required,custom[email]]'
+    %tr
+      %td
+        = f.label "Mother's name:"
+      %td
+        = f.text_field :mother_name, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Present Address:"
+      %td
+        = f.text_area :present_address  ,:rows=>3,:cols=>26, :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Permanent Address"
+      %td
+        = f.text_area :permanent_address ,:rows=>3,:cols=>26, :class=>'validate[required]'
+    %tr
+      %td{:colspan=>2,:align=>'center'}
+        %input{:type=>'submit',:class=>'button',:value=>"Submit"}
+
+
+

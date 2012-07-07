@@ -1,0 +1,10 @@
+%ul#nav-one.dropmenu
+  - @menus.each do |menu|
+    %li.haschildren
+      %a{:href => "#{menu.url}"}
+        = menu.Title
+      %ul.submenu
+        -menu.sub_menus.each do |sub_menu|
+          %li
+            %a{:href=>"#{sub_menu.url}"}
+              = sub_menu.Title

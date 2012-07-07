@@ -1,0 +1,82 @@
+!!!
+:css
+  .school_form{
+    width: 50%;
+    margin-left: 275px;
+    margin-top: 20px;
+    background: #F0F0F0;
+  }
+  .school_form label{
+    float: left;
+    font-family: "MuseoSans500",helvetica,arial,sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    padding:4px 8px;
+  }
+  .school_form input, .school textarea{
+    width: 221px;
+    background: transparent url('/assets/bg.jpg') no-repeat;
+    color : black;
+    height:20px;
+    border:0;
+    padding:4px 8px;
+  }
+  #school_form_gender{
+    width: 221px;
+  }
+  .header{
+    background: #00ffcc;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+  }
+:javascript
+  $(document).ready(function(){
+    $(".new_school").validationEngine();
+  });
+= form_for @school,:url=>{ :controller=>'school',:action=>'create' } do |f|
+  -if @school.errors.any?
+    #error_explanation
+      %h2
+      = "#{pluralize(@school.errors.count, "error")} prohibited this blog_entry from being saved:"
+      %ul
+        - @school.errors.full_messages.each do |msg|
+          %li
+            = msg
+  %table.school_form
+    %tr.header
+      %td{:colspan=>2}
+        School Details
+    %tr
+      %td
+        = f.label "Name"
+      %td
+        = f.text_field :name , :class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Address"
+      %td
+        = f.text_area :address, :class=>'validate[required]',:rows=>3,:cols=>26
+    %tr
+      %td
+        = f.label "Contact Person"
+      %td
+        = f.text_field :contact_person,:class=>'validate[required]'
+    %tr
+      %td
+        = f.label "Email"
+      %td
+        = f.text_field :email
+    %tr
+      %td
+        = f.label "Contact No:"
+      %td
+        = f.text_field :contact_no
+    %tr
+      %td
+        = f.label "Licence Size"
+      %td
+        = f.text_field :no_of_licences
+    %tr
+      %td{:colspan=>2,:align=>'center'}
+        %input{:type=>'submit',:class=>'button',:value=>"Submit"}

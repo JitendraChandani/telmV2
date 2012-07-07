@@ -1,0 +1,76 @@
+!!!
+:css
+  .school_form{
+    width: 50%;
+    margin-left: 275px;
+    margin-top: 20px;
+    background: #F0F0F0;
+  }
+  .school_form label{
+    float: left;
+    font-family: MuseoSans500,helvetica,arial,sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    padding:4px 8px;
+  }
+  .school_form input, .school textarea{
+    width: 221px;
+    background: transparent url('/assets/bg.jpg') no-repeat;
+    color : black;
+    height:20px;
+    border:0;
+    padding:4px 8px;
+  }
+  .header{
+    background: #00ffcc;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+  }
+%table.school_form
+  %tr.header
+    %td{:colspan=>2}
+      School Details
+  %tr
+    %td
+      %label Name
+    %td
+      = "#{@school.name}"
+  %tr
+    %td
+      %label Address
+    %td
+      = "#{@school.address}"
+  %tr
+    %td
+      %label Contact Person
+    %td
+      = "#{@school.contact_person}"
+  %tr
+    %td
+      %label Email
+    %td
+      = "#{@school.email}"
+  %tr
+    %td
+      %label Contact No:
+    %td
+      = "#{@school.contact_no}"
+  %tr
+    %td
+      %label Licence Size
+    %td
+      = "#{@school.no_of_licences}"
+  %tr
+    %td
+      %label Status
+    %td
+      = "#{@school.status_id}"
+  %tr
+    %td{:align=>'center'}
+      %a{:href=>'/school/index'}
+        %input{:type=>'button',:class=>'button',:value=>'Back'}
+    %td{:align=>'center'}
+      %a{:href=>"/school/edit/#{@school.id}"}
+        %input{:type=>'button',:class=>'button',:value=>'Edit'}
+

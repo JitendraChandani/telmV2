@@ -1,0 +1,11 @@
+= javascript_include_tag "fullcalendar"
+:css
+  #calendar{
+    width: 272px;
+    height: 290px;
+  }
+:javascript
+  $(document).ready(function(){
+    $('#full_calendar').fullCalendar({});
+  });
+%div#full_calendar
